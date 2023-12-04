@@ -1,0 +1,32 @@
+@use 'sass:math';
+
+$font-scale-ratio: math.div(4, 3);
+
+$font-size-display-1: math.pow($font-scale-ratio, 6) * 1rem;
+$font-size-display-2: math.pow($font-scale-ratio, 5) * 1rem;
+$font-size-display-3: math.pow($font-scale-ratio, 4) * 1rem;
+
+$font-size-large: math.pow($font-scale-ratio, 1) * 1rem;
+$font-size-medium: 1rem;
+$font-size-small: math.div(1, math.pow($font-scale-ratio, 0.5));
+
+$font-family-sans: 'IBM Plex Sans', sans-serif;
+$font-family-mono: 'IBM Plex Mono', monospace;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$color-white: white;
+$color-gray-700: #3d3d3d;
+$color-black: #151515;
+
+$color-green-500: #00eca5;
+
+$color-blue-500: #2454ff;
+
+$color-red-500: #ef536d;
+
+$color-orange-500: #ffbe15;
+$color-orange-700: #f87830;

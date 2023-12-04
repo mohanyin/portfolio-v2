@@ -1,85 +1,87 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <header>mohan yin</header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <main>
+    <div class="intro">
+      <h1 class="intro__text">
+        <span class="intro__text__hi">Hi</span>
+        <span class="intro__text__name">I’m Mohan.</span>
+      </h1>
+      <button class="intro__button">
+        Let’s talk
+        <div class="intro__button__arrow"></div>
+      </button>
     </div>
-  </header>
-
-  <RouterView />
+  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  gap: 36px;
+  position: fixed;
+  top: 0;
 }
 
-.logo {
+.intro__text {
+  position: relative;
+}
+
+.intro__text__hi {
+  font-weight: $font-weight-medium;
+  font-size: $font-size-display-2;
+  background-color: $color-orange-500;
+  border: 2px solid $color-black;
   display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+  height: 124px;
+  width: 124px;
+  border-radius: 50%;
   text-align: center;
-  margin-top: 2rem;
+  line-height: 118px;
+  margin-bottom: -24px;
+  transform: rotate(-10deg);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.intro__text__name {
+  font-family: $font-family-mono;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-display-1;
+  color: $color-white;
+  background-color: $color-black;
+  display: block;
+  text-align: center;
+  border-radius: 24px;
+  padding: 12px 36px;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.intro__button {
+  font-weight: $font-weight-medium;
+  font-size: $font-size-display-3;
+  border-radius: 1000px;
+  background: $color-white;
+  padding: 18px 18px 18px 36px;
+  line-height: 1;
+  border: 2px solid $color-black;
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
-nav a {
+.intro__button__arrow {
+  background: $color-blue-500;
+  height: 72px;
+  width: 72px;
+  border: 2px solid $color-black;
+  border-radius: 1000px;
   display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>
