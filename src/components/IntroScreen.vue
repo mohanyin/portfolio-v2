@@ -1,12 +1,16 @@
-<script setup lang="ts">
-import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
-</script>
-
 <template>
-  <div class="intro">
+  <IntroAnimation
+    ref="animation"
+    :target-position="hiCirclePosition"
+    @animation:expand-complete="shouldShow = true"
+  />
+
+  <div class="intro" :class="{ 'intro--hide': !shouldShow }">
     <div class="intro__text">
       <h1>
-        <span class="intro__text__hi">Hi</span>
+        <span ref="hiCircle" class="intro__text__hi">
+          <span class="intro__text__hi-text">Hi</span>
+        </span>
         <span class="intro__text__name">I’m Mohan.</span>
       </h1>
       <button class="intro__info">
@@ -23,6 +27,23 @@ import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
   </div>
 </template>
 
+<script setup lang="ts">
+import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
+import IntroAnimation from '@/components/IntroAnimation.vue'
+import { onMounted, ref } from 'vue'
+
+const shouldShow = ref(false)
+const hiCirclePosition = ref<DOMRect | null>(null)
+
+const hiCircle = ref<HTMLElement | null>(null)
+const animation = ref<typeof IntroAnimation | null>(null)
+
+onMounted(() => {
+  hiCirclePosition.value = hiCircle.value!.getBoundingClientRect()
+  animation.value!.startAnimation(hiCirclePosition.value!)
+})
+</script>
+
 <style lang="scss" scoped>
 @use '@/styles/colors.scss';
 @use '@/styles/helpers.scss';
@@ -37,6 +58,10 @@ import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
   inset: 0;
 }
 
+.intro--hide {
+  opacity: 0;
+}
+
 .intro__text {
   position: relative;
 }
@@ -44,6 +69,7 @@ import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
 .intro__text__hi {
   @include helpers.circle(128px);
 
+  position: relative;
   font-weight: type.$weight-medium;
   font-size: type.$size-display-2;
   background-color: colors.$orange-500;
@@ -52,7 +78,12 @@ import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
   text-align: center;
   line-height: 118px;
   margin-bottom: -24px;
+  z-index: 2;
+}
+
+.intro__text__hi-text {
   transform: rotate(-10deg);
+  display: block;
 }
 
 .intro__text__name {
