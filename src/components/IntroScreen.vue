@@ -13,7 +13,7 @@
         </span>
         <span class="intro__text__name">I’m Mohan.</span>
       </h1>
-      <button class="intro__info">
+      <button aria-label="About my name" class="intro__info">
         <PhInfo />
       </button>
     </div>
@@ -28,20 +28,20 @@
 </template>
 
 <script setup lang="ts">
-import { PhInfo, PhArrowRight } from '@phosphor-icons/vue'
-import IntroAnimation from '@/components/IntroAnimation.vue'
-import { onMounted, ref } from 'vue'
+import { PhInfo, PhArrowRight } from '@phosphor-icons/vue';
+import IntroAnimation from '@/components/IntroAnimation.vue';
+import { onMounted, ref } from 'vue';
 
-const shouldShow = ref(false)
-const hiCirclePosition = ref<DOMRect | null>(null)
+const shouldShow = ref(false);
+const hiCirclePosition = ref<DOMRect | null>(null);
 
-const hiCircle = ref<HTMLElement | null>(null)
-const animation = ref<typeof IntroAnimation | null>(null)
+const hiCircle = ref<HTMLElement | null>(null);
+const animation = ref<typeof IntroAnimation | null>(null);
 
 onMounted(() => {
-  hiCirclePosition.value = hiCircle.value!.getBoundingClientRect()
-  animation.value!.startAnimation(hiCirclePosition.value!)
-})
+  hiCirclePosition.value = hiCircle.value!.getBoundingClientRect();
+  animation.value!.startAnimation(hiCirclePosition.value!);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -104,11 +104,18 @@ onMounted(() => {
 
   position: absolute;
   right: 60px;
-  bottom: 100px;
+  bottom: 80px;
   color: colors.$white;
   background: colors.$blue-500;
-  border: 2px solid colors.$black;
+  border: 2px solid colors.$green-500;
   font-size: 32px;
+  z-index: 1;
+  box-shadow: 0px 4px 0px 0px colors.$green-500;
+
+  &:active {
+    background: colors.$blue-400;
+    transform: scale(0.95);
+  }
 }
 
 .intro__cta {
@@ -120,18 +127,25 @@ onMounted(() => {
   background: colors.$white;
   padding: 18px 18px 18px 36px;
   line-height: 1;
-  border: 2px solid colors.$black;
+  color: colors.$black;
+  border: 2px solid colors.$blue-500;
   gap: 24px;
+  box-shadow: 0px 12px 0px 0px colors.$blue-500;
+  transition: transform 250ms ease-in-out;
+
+  &:active {
+    background: colors.$green-100;
+    transform: scale(0.95);
+  }
 }
 
 .intro__cta__arrow {
   @include helpers.center-contents;
 
-  background: colors.$blue-500;
+  background: colors.$green-500;
   height: 72px;
   width: 72px;
-  border: 2px solid colors.$black;
   border-radius: 1000px;
-  color: colors.$white;
+  color: colors.$black;
 }
 </style>
