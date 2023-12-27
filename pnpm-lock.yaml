@@ -11,6 +11,7 @@ specifiers:
   '@vue/tsconfig': ^0.4.0
   eslint: ^8.49.0
   eslint-plugin-vue: ^9.17.0
+  gsap: ^3.12.4
   npm-run-all2: ^6.1.1
   pinia: ^2.1.7
   prettier: ^3.0.3
@@ -23,6 +24,7 @@ specifiers:
 
 dependencies:
   '@phosphor-icons/vue': 2.1.6_vue@3.3.9
+  gsap: 3.12.4
   pinia: 2.1.7_typescript@5.2.2+vue@3.3.9
   vue: 3.3.9_typescript@5.2.2
   vue-router: 4.2.5_vue@3.3.9
@@ -1327,6 +1329,10 @@ packages:
   /graphemer/1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
+
+  /gsap/3.12.4:
+    resolution: {integrity: sha512-1ByAq8dD0W4aBZ/JArgaQvc0gyUfkGkP8mgAQa0qZGdpOKlSOhOf+WNXjoLimKaKG3Z4Iu6DKZtnyszqQeyqWQ==}
+    dev: false
 
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}

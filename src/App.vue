@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import IntroScreen from './components/IntroScreen.vue'
+import IntroAnimation from '@/components/IntroAnimation.vue'
 </script>
 
 <template>
   <header>mohan yin</header>
 
   <main>
-    <IntroScreen />
+    <IntroAnimation />
   </main>
 </template>
