@@ -122,22 +122,22 @@ defineExpose({ startAnimation });
 }
 
 .circle--yellow {
-  @include intro-circle(30vh, radial-gradient(colors.$orange-700, colors.$orange-500));
+  @include intro-circle(30vh, radial-gradient(colors.$orange-700 0, colors.$orange-500 30vh));
   z-index: 103;
 }
 
 .circle--orange {
-  @include intro-circle(38vh, radial-gradient(colors.$orange-700, colors.$red-500));
+  @include intro-circle(38vh, radial-gradient(colors.$orange-700 0, colors.$red-500 38vh));
   z-index: 102;
 }
 
 .circle--red {
-  @include intro-circle(55vh, radial-gradient(colors.$red-500, colors.$blue-500));
+  @include intro-circle(55vh, radial-gradient(colors.$red-500 0, colors.$blue-500 55vh));
   z-index: 101;
 }
 
 .circle--blue {
-  @include intro-circle(95vh, radial-gradient(colors.$green-600, colors.$blue-500));
+  @include intro-circle(95vh, radial-gradient(colors.$green-600 0, colors.$blue-500 95vh));
   z-index: 100;
 }
 </style>
