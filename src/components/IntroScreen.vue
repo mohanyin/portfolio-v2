@@ -77,7 +77,8 @@ onMounted(() => {
   display: block;
   text-align: center;
   line-height: 118px;
-  margin-bottom: -24px;
+  margin-bottom: -48px;
+  margin-left: -48px;
   z-index: 2;
 }
 
@@ -90,12 +91,11 @@ onMounted(() => {
   font-family: type.$family-mono;
   font-weight: type.$weight-bold;
   font-size: type.$size-display-1;
-  color: colors.$white;
-  background-color: colors.$black;
+  color: colors.$black;
   display: block;
   text-align: center;
   border-radius: 24px;
-  padding: 12px 36px;
+  padding: 0 36px;
 }
 
 .intro__info {
