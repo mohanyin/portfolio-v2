@@ -13,9 +13,11 @@
         </span>
         <span class="intro__text__name">I’m Mohan.</span>
       </h1>
-      <button aria-label="About my name" class="intro__info">
-        <PhInfo />
-      </button>
+      <div class="intro__info-container">
+        <button aria-label="About my name" class="intro__info">
+          <PhInfo />
+        </button>
+      </div>
     </div>
 
     <button class="intro__cta">
@@ -72,8 +74,8 @@ onMounted(() => {
   position: relative;
   font-weight: type.$weight-medium;
   font-size: type.$size-display-2;
-  background-color: colors.$orange-500;
-  border: 2px solid colors.$black;
+  background: colors.$gradient-orange;
+  box-shadow: colors.$glass-effect;
   display: block;
   text-align: center;
   line-height: 118px;
@@ -98,22 +100,33 @@ onMounted(() => {
   padding: 0 36px;
 }
 
+.intro__info-container {
+  position: absolute;
+  z-index: 1;
+  right: 60px;
+  bottom: 80px;
+}
+
 .intro__info {
   @include helpers.square(56px, 12px);
   @include helpers.center-contents;
 
-  position: absolute;
-  right: 60px;
-  bottom: 80px;
   color: colors.$white;
-  background: colors.$blue-500;
-  border: 2px solid colors.$green-500;
+  background: colors.$gradient-blue-green;
+  box-shadow: colors.$glass-effect;
   font-size: 32px;
-  z-index: 1;
-  box-shadow: 0px 4px 0px 0px colors.$green-500;
+
+  &::before {
+    @include helpers.square(56px, 12px);
+
+    content: ' ';
+    position: absolute;
+    top: 6px;
+    z-index: -1;
+    background: colors.$gradient-blue-green-dark;
+  }
 
   &:active {
-    background: colors.$blue-400;
     transform: scale(0.95);
   }
 }
@@ -121,20 +134,28 @@ onMounted(() => {
 .intro__cta {
   @include helpers.center-contents;
 
+  position: relative;
   font-weight: type.$weight-medium;
   font-size: type.$size-display-3;
   border-radius: 1000px;
-  background: colors.$white;
+  background: colors.$gradient-red-blue;
   padding: 18px 18px 18px 36px;
   line-height: 1;
-  color: colors.$black;
-  border: 2px solid colors.$blue-500;
+  color: colors.$white;
   gap: 24px;
-  box-shadow: 0px 12px 0px 0px colors.$blue-500;
   transition: transform 250ms ease-in-out;
+  box-shadow: colors.$glass-effect;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    inset: 6px 0 -6px;
+    z-index: -1;
+    border-radius: 1000px;
+    background: colors.$gradient-red-blue-dark;
+  }
 
   &:active {
-    background: colors.$green-100;
     transform: scale(0.95);
   }
 }
@@ -142,10 +163,10 @@ onMounted(() => {
 .intro__cta__arrow {
   @include helpers.center-contents;
 
-  background: colors.$green-500;
+  background: colors.$black;
   height: 72px;
   width: 72px;
   border-radius: 1000px;
-  color: colors.$black;
+  color: colors.$white;
 }
 </style>

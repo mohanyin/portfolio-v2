@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $white: white;
 $gray-700: #3d3d3d;
 $black: #151515;
@@ -13,3 +15,22 @@ $red-500: #ef536d;
 
 $orange-500: #ffbe15;
 $orange-700: #f87830;
+
+$glass-effect:
+  inset 2px 2px 2px color.change($white, $alpha: 0.2),
+  inset -2px -2px 2px color.change($black, $alpha: 0.2);
+
+$gradient-orange: radial-gradient(60% 60% at 60% 60%, $orange-700 20%, $orange-500 95%);
+$gradient-orange-red: radial-gradient(60% 60% at 60% 60%, $red-500 20%, $orange-700 95%);
+$gradient-red-blue: radial-gradient(60% 60% at 60% 60%, $blue-500 20%, $red-500 95%);
+$gradient-red-blue-dark: radial-gradient(
+  60% 60% at 60% 60%,
+  color.adjust($blue-500, $lightness: -25%, $saturation: -50%) 20%,
+  color.adjust($red-500, $lightness: -25%, $saturation: -50%) 95%
+);
+$gradient-blue-green: radial-gradient(60% 60% at 60% 60%, $green-600 20%, $blue-500 95%);
+$gradient-blue-green-dark: radial-gradient(
+  60% 60% at 60% 60%,
+  color.adjust($green-600, $lightness: -25%, $saturation: -50%) 20%,
+  color.adjust($blue-500, $lightness: -25%, $saturation: -50%) 95%
+);

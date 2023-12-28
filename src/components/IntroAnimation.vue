@@ -62,8 +62,8 @@ function* linearIterator(start: number, interval: number): Generator<number> {
 
 const startAnimation = (targetPosition: DOMRect) => {
   const centerTimer = linearIterator(1, 0.25);
-  const coverTimer = linearIterator(3, 0.25);
-  const coverDuration = linearIterator(2.5, -0.125);
+  const coverTimer = linearIterator(4, 0.125);
+  const coverDuration = linearIterator(2.5, 0);
   gsap
     .timeline({ defaults: { ease: 'power3.inOut' } })
     .fromTo(yellow.value, START, CENTER('30vh'))
@@ -113,12 +113,11 @@ defineExpose({ startAnimation });
 </script>
 
 <style lang="scss" scoped>
-@use 'sass:color';
 @use '@/styles/colors.scss';
 @use '@/styles/helpers.scss';
 @use '@/styles/type.scss';
 
-@mixin intro-circle($size, $color-inner, $color-outer) {
+@mixin intro-circle($size, $gradient) {
   @include helpers.circle($size);
   @include helpers.center-contents;
   font-weight: type.$weight-medium;
@@ -128,29 +127,27 @@ defineExpose({ startAnimation });
   top: 50%;
   scale: 100%;
   overflow: hidden;
-  box-shadow:
-    inset 2px 2px 2px color.change(colors.$white, $alpha: 0.2),
-    inset -1px -1px 2px color.change(colors.$black, $alpha: 0.2);
-  background: radial-gradient(60% 60% at 60% 60%, $color-inner 20%, $color-outer 95%);
+  box-shadow: colors.$glass-effect;
+  background: $gradient;
 }
 
 .circle--yellow {
-  @include intro-circle(30vh, colors.$orange-700, colors.$orange-500);
+  @include intro-circle(30vh, colors.$gradient-orange);
   z-index: 103;
 }
 
 .circle--orange {
-  @include intro-circle(38vh, colors.$red-500, colors.$orange-700);
+  @include intro-circle(38vh, colors.$gradient-orange-red);
   z-index: 102;
 }
 
 .circle--red {
-  @include intro-circle(55vh, colors.$blue-500, colors.$red-500);
+  @include intro-circle(55vh, colors.$gradient-red-blue);
   z-index: 101;
 }
 
 .circle--blue {
-  @include intro-circle(95vh, colors.$green-600, colors.$blue-500);
+  @include intro-circle(95vh, colors.$gradient-blue-green);
   z-index: 100;
 }
 </style>
