@@ -11,16 +11,16 @@
         <span ref="hiCircle" class="intro__text__hi">
           <span class="intro__text__hi-text">Hi</span>
         </span>
-        <span class="intro__text__name">I’m Mohan.</span>
+        <span ref="name" class="intro__text__name">I’m Mohan.</span>
       </h1>
-      <div class="intro__info-container">
+      <div ref="info" class="intro__info-container">
         <button aria-label="About my name" class="intro__info">
           <PhInfo />
         </button>
       </div>
     </div>
 
-    <button class="intro__cta">
+    <button ref="cta" class="intro__cta" @click="startChat">
       Let’s talk
       <div class="intro__cta__arrow">
         <PhArrowRight />
@@ -33,17 +33,58 @@
 import { PhInfo, PhArrowRight } from '@phosphor-icons/vue';
 import IntroAnimation from '@/components/IntroAnimation.vue';
 import { onMounted, ref } from 'vue';
+import { gsap } from 'gsap';
+
+const hiCircle = ref<HTMLElement | null>(null);
+const cta = ref<HTMLElement | null>(null);
+const name = ref<HTMLElement | null>(null);
+const info = ref<HTMLElement | null>(null);
 
 const shouldShow = ref(false);
 const hiCirclePosition = ref<DOMRect | null>(null);
-
-const hiCircle = ref<HTMLElement | null>(null);
 const animation = ref<typeof IntroAnimation | null>(null);
 
 onMounted(() => {
   hiCirclePosition.value = hiCircle.value!.getBoundingClientRect();
   animation.value!.startAnimation(hiCirclePosition.value!);
 });
+
+const startChat = () => {
+  gsap
+    .timeline()
+    .to(hiCircle.value, {
+      duration: 1,
+      y: '-100px',
+      opacity: 0,
+    })
+    .to(
+      name.value,
+      {
+        duration: 0.5,
+        y: '-32px',
+        opacity: 0,
+      },
+      0.125,
+    )
+    .to(
+      info.value,
+      {
+        duration: 0.5,
+        y: '-32px',
+        opacity: 0,
+      },
+      0.25,
+    )
+    .to(
+      cta.value,
+      {
+        duration: 0.5,
+        y: '32px',
+        opacity: 0,
+      },
+      0.375,
+    );
+};
 </script>
 
 <style lang="scss" scoped>
@@ -66,6 +107,7 @@ onMounted(() => {
 
 .intro__text {
   position: relative;
+  line-height: 84px;
 }
 
 .intro__text__hi {
@@ -79,7 +121,7 @@ onMounted(() => {
   display: block;
   text-align: center;
   line-height: 118px;
-  margin-bottom: -48px;
+  margin-bottom: -32px;
   margin-left: -48px;
   z-index: 2;
 }
@@ -104,30 +146,32 @@ onMounted(() => {
   position: absolute;
   z-index: 1;
   right: 60px;
-  bottom: 80px;
+  bottom: 40px;
 }
 
 .intro__info {
-  @include helpers.square(56px, 12px);
+  @include helpers.square(48px, 12px);
   @include helpers.center-contents;
 
   color: colors.$white;
   background: colors.$gradient-blue-green;
   box-shadow: colors.$glass-effect;
   font-size: 32px;
+  margin-bottom: 4px;
 
   &::before {
-    @include helpers.square(56px, 12px);
+    @include helpers.square(48px, 12px);
 
     content: ' ';
     position: absolute;
-    top: 6px;
+    top: 4px;
     z-index: -1;
     background: colors.$gradient-blue-green-dark;
   }
 
   &:active {
-    transform: scale(0.95);
+    margin-top: 4px;
+    margin-bottom: 0px;
   }
 }
 
@@ -143,8 +187,9 @@ onMounted(() => {
   line-height: 1;
   color: colors.$white;
   gap: 24px;
-  transition: transform 250ms ease-in-out;
+  transition: background-size 250ms ease-in-out;
   box-shadow: colors.$glass-effect;
+  margin-bottom: 6px;
 
   &::before {
     content: ' ';
@@ -156,7 +201,12 @@ onMounted(() => {
   }
 
   &:active {
-    transform: scale(0.95);
+    margin-top: 6px;
+    margin-bottom: 0px;
+
+    &::before {
+      inset: 0;
+    }
   }
 }
 

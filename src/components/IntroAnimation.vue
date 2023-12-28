@@ -68,7 +68,7 @@ const startAnimation = (targetPosition: DOMRect) => {
     .timeline({ defaults: { ease: 'power3.inOut' } })
     .fromTo(yellow.value, START, CENTER('30vh'))
     .to(yellow.value, COVER_AND_ROTATE(targetPosition), coverTimer.next().value)
-    .to(yellow.value, { duration: 3, opacity: 0 }, 6)
+    .to(yellow.value, { duration: 3, opacity: 0 }, 7)
     .call(() => {
       hasCompletedAnimation.value = true;
     });

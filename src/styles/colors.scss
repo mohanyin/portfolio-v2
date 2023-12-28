@@ -23,6 +23,7 @@ $glass-effect:
 $gradient-orange: radial-gradient(60% 60% at 60% 60%, $orange-700 20%, $orange-500 95%);
 $gradient-orange-red: radial-gradient(60% 60% at 60% 60%, $red-500 20%, $orange-700 95%);
 $gradient-red-blue: radial-gradient(60% 60% at 60% 60%, $blue-500 20%, $red-500 95%);
+$gradient-red-blue-shrink: radial-gradient(60% 60% at 60% 60%, $blue-500 0%, $red-500 70%);
 $gradient-red-blue-dark: radial-gradient(
   60% 60% at 60% 60%,
   color.adjust($blue-500, $lightness: -25%, $saturation: -50%) 20%,
