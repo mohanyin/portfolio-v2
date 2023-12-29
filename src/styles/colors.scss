@@ -2,7 +2,7 @@
 
 $white: white;
 $gray-700: #3d3d3d;
-$black: #151515;
+$black: #050505;
 
 $green-100: #e2fff6;
 $green-500: #00eca5;
@@ -26,8 +26,8 @@ $gradient-red-blue: radial-gradient(60% 60% at 60% 60%, $blue-500 20%, $red-500 
 $gradient-red-blue-shrink: radial-gradient(60% 60% at 60% 60%, $blue-500 0%, $red-500 70%);
 $gradient-red-blue-dark: radial-gradient(
   60% 60% at 60% 60%,
-  color.adjust($blue-500, $lightness: -25%, $saturation: -50%) 20%,
-  color.adjust($red-500, $lightness: -25%, $saturation: -50%) 95%
+  color.adjust($blue-500, $lightness: -35%, $saturation: -50%) 20%,
+  color.adjust($red-500, $lightness: -35%, $saturation: -50%) 95%
 );
 $gradient-blue-green: radial-gradient(60% 60% at 60% 60%, $green-600 20%, $blue-500 95%);
 $gradient-blue-green-dark: radial-gradient(

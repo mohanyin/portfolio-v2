@@ -1,17 +1,11 @@
 <template>
-  <IntroAnimation
-    ref="animation"
-    :target-position="hiCirclePosition"
-    @animation:expand-complete="shouldShow = true"
-  />
+  <IntroAnimation ref="animation" @animation:expand-complete="shouldShow = true" />
 
-  <div class="intro" :class="{ 'intro--hide': !shouldShow }">
+  <div v-if="shouldShow" class="intro">
     <div class="intro__text">
-      <h1>
-        <span ref="hiCircle" class="intro__text__hi">
-          <span class="intro__text__hi-text">Hi</span>
-        </span>
-        <span ref="name" class="intro__text__name">I’m Mohan.</span>
+      <h1 ref="name" class="intro__text__title">
+        I’m Mohan,<br />
+        <span class="intro__text__subtitle">designer and engineer.</span>
       </h1>
       <div ref="info" class="intro__info-container">
         <button aria-label="About my name" class="intro__info">
@@ -32,40 +26,23 @@
 <script setup lang="ts">
 import { PhInfo, PhArrowRight } from '@phosphor-icons/vue';
 import IntroAnimation from '@/components/IntroAnimation.vue';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { gsap } from 'gsap';
 
-const hiCircle = ref<HTMLElement | null>(null);
 const cta = ref<HTMLElement | null>(null);
 const name = ref<HTMLElement | null>(null);
 const info = ref<HTMLElement | null>(null);
 
 const shouldShow = ref(false);
-const hiCirclePosition = ref<DOMRect | null>(null);
-const animation = ref<typeof IntroAnimation | null>(null);
-
-onMounted(() => {
-  hiCirclePosition.value = hiCircle.value!.getBoundingClientRect();
-  animation.value!.startAnimation(hiCirclePosition.value!);
-});
 
 const startChat = () => {
   gsap
-    .timeline()
-    .to(hiCircle.value, {
-      duration: 1,
-      y: '-100px',
+    .timeline({ defaults: { ease: 'power3.inOut' } })
+    .to(name.value, {
+      duration: 0.5,
+      y: '-32px',
       opacity: 0,
     })
-    .to(
-      name.value,
-      {
-        duration: 0.5,
-        y: '-32px',
-        opacity: 0,
-      },
-      0.125,
-    )
     .to(
       info.value,
       {
@@ -99,6 +76,7 @@ const startChat = () => {
   gap: 36px;
   position: fixed;
   inset: 0;
+  text-align: center;
 }
 
 .intro--hide {
@@ -108,12 +86,14 @@ const startChat = () => {
 .intro__text {
   position: relative;
   line-height: 84px;
+  margin-bottom: 32px;
 }
 
 .intro__text__hi {
   @include helpers.circle(128px);
 
   position: relative;
+  color: colors.$white;
   font-weight: type.$weight-medium;
   font-size: type.$size-display-2;
   background: colors.$gradient-orange;
@@ -131,22 +111,33 @@ const startChat = () => {
   display: block;
 }
 
-.intro__text__name {
+.intro__text__title {
   font-family: type.$family-mono;
   font-weight: type.$weight-bold;
   font-size: type.$size-display-1;
-  color: colors.$black;
+  color: colors.$white;
   display: block;
   text-align: center;
   border-radius: 24px;
   padding: 0 36px;
 }
 
+.intro__text__subtitle {
+  font-weight: type.$weight-light;
+  font-family: type.$family-sans;
+  font-size: type.$size-display-3;
+  color: colors.$green-500;
+  line-height: 1.3;
+  display: block;
+  margin-top: 16px;
+  font-style: italic;
+}
+
 .intro__info-container {
   position: absolute;
   z-index: 1;
-  right: 60px;
-  bottom: 40px;
+  right: 30%;
+  top: -10px;
 }
 
 .intro__info {
@@ -180,13 +171,13 @@ const startChat = () => {
 
   position: relative;
   font-weight: type.$weight-medium;
-  font-size: type.$size-display-3;
+  font-size: type.$size-display-4;
   border-radius: 1000px;
   background: colors.$gradient-red-blue;
-  padding: 18px 18px 18px 36px;
+  padding: 24px 36px;
   line-height: 1;
   color: colors.$white;
-  gap: 24px;
+  gap: 12px;
   transition: background-size 250ms ease-in-out;
   box-shadow: colors.$glass-effect;
   margin-bottom: 6px;
@@ -213,10 +204,6 @@ const startChat = () => {
 .intro__cta__arrow {
   @include helpers.center-contents;
 
-  background: colors.$black;
-  height: 72px;
-  width: 72px;
-  border-radius: 1000px;
   color: colors.$white;
 }
 </style>

@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const emit = defineEmits<{
   (event: 'animation:expand-complete'): void;
@@ -38,17 +38,13 @@ const CENTER = (size: string): gsap.TweenVars => {
     left: '50%',
   };
 };
-const COVER_AND_ROTATE = (targetPosition: DOMRect): gsap.TweenVars => {
-  return {
-    duration: 1.5,
-    height: targetPosition.height,
-    width: targetPosition.width,
-    top: targetPosition.top,
-    left: targetPosition.left,
-    yPercent: 0,
-    xPercent: 0,
-    rotate: '-10deg',
-  };
+const DISAPPEAR: gsap.TweenVars = {
+  duration: 1.5,
+  height: 0,
+  width: 0,
+  yPercent: 0,
+  xPercent: 0,
+  rotate: '-15deg',
 };
 const HIDDEN: gsap.TweenVars = { duration: 0, opacity: 0 };
 
@@ -60,14 +56,14 @@ function* linearIterator(start: number, interval: number): Generator<number> {
   }
 }
 
-const startAnimation = (targetPosition: DOMRect) => {
+onMounted(() => {
   const centerTimer = linearIterator(1, 0.25);
-  const coverTimer = linearIterator(4, 0.125);
-  const coverDuration = linearIterator(2.5, 0);
+  const coverTimer = linearIterator(4, 0.5);
+  const coverDuration = linearIterator(1.5, 0);
   gsap
     .timeline({ defaults: { ease: 'power3.inOut' } })
     .fromTo(yellow.value, START, CENTER('30vh'))
-    .to(yellow.value, COVER_AND_ROTATE(targetPosition), coverTimer.next().value)
+    .to(yellow.value, DISAPPEAR, coverTimer.next().value)
     .to(yellow.value, { duration: 3, opacity: 0 }, 7)
     .call(() => {
       hasCompletedAnimation.value = true;
@@ -78,7 +74,7 @@ const startAnimation = (targetPosition: DOMRect) => {
     .fromTo(orange.value, START, { ...CENTER('38vh'), duration: 2.75 }, centerTimer.next().value)
     .to(
       orange.value,
-      { ...COVER_AND_ROTATE(targetPosition), duration: coverDuration.next().value },
+      { ...DISAPPEAR, duration: coverDuration.next().value },
       coverTimer.next().value,
     )
     .to(orange.value, HIDDEN);
@@ -86,11 +82,7 @@ const startAnimation = (targetPosition: DOMRect) => {
   gsap
     .timeline({ defaults: { ease: 'back.inOut' } })
     .fromTo(red.value, START, { ...CENTER('55vh'), duration: 2.75 }, centerTimer.next().value)
-    .to(
-      red.value,
-      { ...COVER_AND_ROTATE(targetPosition), duration: coverDuration.next().value },
-      coverTimer.next().value,
-    )
+    .to(red.value, { ...DISAPPEAR, duration: coverDuration.next().value }, coverTimer.next().value)
     .to(red.value, HIDDEN);
 
   gsap
@@ -100,16 +92,14 @@ const startAnimation = (targetPosition: DOMRect) => {
     .to(
       blue.value,
       {
-        ...COVER_AND_ROTATE(targetPosition),
+        ...DISAPPEAR,
         duration: coverDuration.next().value,
         ease: 'power3.inOut',
       },
       coverTimer.next().value,
     )
     .to(blue.value, HIDDEN);
-};
-
-defineExpose({ startAnimation });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -122,6 +112,7 @@ defineExpose({ startAnimation });
   @include helpers.center-contents;
   font-weight: type.$weight-medium;
   font-size: type.$size-display-2;
+  color: colors.$white;
   position: fixed;
   left: 50%;
   top: 50%;
