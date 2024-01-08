@@ -16,9 +16,7 @@ $red-500: #ef536d;
 $orange-500: #ffbe15;
 $orange-700: #f87830;
 
-$glass-effect:
-  inset 2px 2px 2px color.change($white, $alpha: 0.2),
-  inset -2px -2px 2px color.change($black, $alpha: 0.2);
+$glass-effect: inset 2px 2px 2px color.change($white, $alpha: 0.2);
 
 $gradient-orange: radial-gradient(60% 60% at 60% 60%, $orange-700 20%, $orange-500 95%);
 $gradient-orange-red: radial-gradient(60% 60% at 60% 60%, $red-500 20%, $orange-700 95%);

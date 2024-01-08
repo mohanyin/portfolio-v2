@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import IntroScreen from '@/components/IntroScreen.vue'
+import IntroScreen from '@/components/IntroScreen.vue';
+import ChatScreen from '@/components/ChatScreen.vue';
 </script>
 
 <template>
   <header>mohan yin</header>
 
   <main>
-    <IntroScreen />
+    <ChatScreen />
+    <!-- <IntroScreen /> -->
   </main>
 </template>
