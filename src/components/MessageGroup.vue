@@ -9,12 +9,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { gsap } from 'gsap';
+
+const sentMessages = ref<string[]>([]);
 
 const props = defineProps<{
   messages: string[];
 }>();
+
+onMounted(() => {
+  const tl = gsap.timeline({ defaults: { duration: 0.5 } });
+  tl.fromTo('.message-group__message', { opacity: 0, x: -20 }, { opacity: 1, x: 0, stagger: 0.1 });
+});
 </script>
 
 <style lang="scss" scoped>
